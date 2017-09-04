@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
 passport.serializeUser((user, done) => {
+  console.log('serialize', user);
+  console.log('serialize', user.id);
   done(null, user.id);
 });
 
@@ -28,11 +30,15 @@ passport.use(
       User.findOne({ googleID: profile.id })
         .then(existingUser => {
           if (existingUser) {
+            console.log('existing user', existingUser);
             done(null, existingUser);
           } else {
             new User({ googleID: profile.id })
               .save()
-              .then(user => done(null, user));
+              .then(user => {
+                console.log('user', user);
+                done(null, user)
+              });
           }
         });
     }
