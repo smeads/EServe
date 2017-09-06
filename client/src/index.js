@@ -11,6 +11,6 @@ const store = createStore(() => [], {}, applyMiddleware());
 ReactDom.render(
   <Provider store={store}>
     <App />
-  </Provider>
-  document.querySelector('#root');
+  </Provider>,
+  document.querySelector('#root')
 );
